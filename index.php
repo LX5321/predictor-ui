@@ -53,7 +53,7 @@
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
       <!-- Brand -->
-      <a class="navbar-brand" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
+      <a class="navbar-brand" href="" target="_blank">
         <strong>PredictorUI</strong>
       </a>
 
@@ -112,7 +112,7 @@
               <!--Card content-->
               <div class="card-body">
                 <!-- Form -->
-                <form name="">
+                <form name="" action="login.php" method="post">
                   <!-- Heading -->
                   <h3 class="dark-grey-text text-center">
                     <strong>Welcome Back!</strong>
@@ -120,11 +120,11 @@
                   <hr />
 
                   <div class="md-form">
-                    <input type="text" id="form3" class="form-control" />
+                    <input type="text" name="username" id="username" class="form-control" />
                     <label for="form3">Username</label>
                   </div>
                   <div class="md-form">
-                    <input type="password" id="form2" class="form-control" />
+                    <input type="password" name="password" id="password" class="form-control" />
                     <label for="form2">Password</label>
                   </div>
 
@@ -155,7 +155,6 @@
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
-  <!-- Initializations -->
+  
 </body>
-
 </html>
