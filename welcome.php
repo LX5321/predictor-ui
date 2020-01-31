@@ -7,7 +7,6 @@ $Array3 = array(4,5,2,14, 25, 46, 86, 52, 2,2);
 $List = implode(', ', $Array);
 $List2 = implode(', ', $Array2);
 $List3 = implode(', ', $Array3);
-
 ?>
 
 <head>
