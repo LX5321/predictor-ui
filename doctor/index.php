@@ -1,5 +1,39 @@
+<?php
+session_start();
+include('../php/config.php');
+$username = $_SESSION['login_user'];
+if (!isset($username)) {
+    header("location: ../php/403.html");
+}
+
+$sql = "SELECT id FROM doctors where username=\"$username\";";
+if ($result = mysqli_query($db, $sql)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+            $user_id = $row['id'];
+        }
+        mysqli_free_result($result);
+    }
+} else {
+    echo "";
+}
+
+$sql = "SELECT count(*) as number_patients FROM relation where doctor_id=$user_id";
+if ($result = mysqli_query($db, $sql)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+            $patients = $row['number_patients'];
+        }
+        mysqli_free_result($result);
+    }
+} else {
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -17,175 +51,34 @@
     <div class="container sm-4">
         <div class="card-deck">
             <div class="card mb-4">
-                <div class="view overlay">
-                    <div>
-                        <canvas id="lineChart"></canvas>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">Glucose</h4>
+                <div class="card-body justify-content-center">
+                    <h4 class="card-title"><?php echo ($patients); ?></h4>
+                    <p class="card-text">Patients registered with @<?php echo($username);?></p>
+                    <button type="button" class="btn btn-blue btn-md">Read more</button>
+                    <button type="button" class="btn btn-blue btn-md">Read more</button>
                 </div>
             </div>
             <div class="card mb-4">
-                <div class="view overlay">
-                    <div>
-                        <canvas id="lineChart2"></canvas>
-                    </div>
-                </div>
                 <div class="card-body">
                     <h4 class="card-title">Insulin</h4>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+                    <button type="button" class="btn btn-blue btn-md">Read more</button>
                 </div>
             </div>
             <div class="card mb-4">
-                <div class="view overlay">
-                    <div>
-                        <canvas id="lineChart3"></canvas>
-                    </div>
-                </div>
+
                 <div class="card-body">
                     <h4 class="card-title">Body Mass Index</h4>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+                    <button type="button" class="btn btn-blue btn-md">Read more</button>
                 </div>
             </div>
         </div>
     </div>
-
-
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../js/popper.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/mdb.min.js"></script>
-    <script>
-        var ctxL = document.getElementById("lineChart").getContext('2d');
-        var myLineChart = new Chart(ctxL, {
-            type: 'line',
-            data: {
-                labels: [<?php print_r($List); ?>],
-                datasets: [{
-                    data: [<?php print_r($List); ?>],
-                    backgroundColor: [
-                        'rgba(0, 137, 132, .2)'
-                    ],
-                    borderColor: [
-                        'rgba(0, 10, 130, .7)',
-                    ],
-                    borderWidth: 2
-                }]
-            },
-
-            options: {
-                responsive: true,
-                scales: {
-                    xAxes: [{
-                        display: false
-                    }],
-                    yAxes: [{
-                        display: false
-                    }]
-                },
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    enabled: false
-                },
-                elements: {
-                    point: {
-                        radius: 0
-                    }
-                }
-
-            }
-        });
-
-        var ctxL2 = document.getElementById("lineChart2").getContext('2d');
-        var myLineChart2 = new Chart(ctxL2, {
-            type: 'line',
-            data: {
-                labels: [<?php print_r($List2); ?>],
-                datasets: [{
-                    data: [<?php print_r($List2); ?>],
-                    backgroundColor: [
-                        'rgba(255, 0, 127, .2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 0, 127, .7)',
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            
-
-            options: {
-                responsive: true,
-                scales: {
-                    xAxes: [{
-                        display: false
-                    }],
-                    yAxes: [{
-                        display: false
-                    }]
-                },
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    enabled: false
-                },
-                elements: {
-                    point: {
-                        radius: 0
-                    }
-                }
-
-            }
-        });
-
-        var ctxL3 = document.getElementById("lineChart3").getContext('2d');
-        var myLineChart3 = new Chart(ctxL3, {
-            type: 'line',
-            data: {
-                labels: [<?php print_r($List3); ?>],
-                datasets: [{
-                    data: [<?php print_r($List3); ?>],
-                    backgroundColor: [
-                        'rgba(240, 163, 10, .2)'
-                    ],
-                    borderColor: [
-                        'rgba(240, 163, 10, .7)',
-                    ],
-                    borderWidth: 2
-                }]
-            },
-
-            options: {
-                responsive: true,
-                scales: {
-                    xAxes: [{
-                        display: false
-                    }],
-                    yAxes: [{
-                        display: false
-                    }]
-                },
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    enabled: false
-                },
-                elements: {
-                    point: {
-                        radius: 0
-                    }
-                }
-
-            }
-        });
-    </script>
 </body>
 
 </html>
