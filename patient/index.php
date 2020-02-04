@@ -4,6 +4,9 @@
 session_start();
 include('../php/config.php');
 $username = $_SESSION['login_user'];
+if(!isset($username)){
+    header("location: ../php/403.html");
+}
 $sql = "SELECT id FROM users where username=\"$username\";";
 if ($result = mysqli_query($db, $sql)) {
     if (mysqli_num_rows($result) > 0) {
