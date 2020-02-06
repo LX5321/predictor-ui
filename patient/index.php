@@ -64,14 +64,14 @@ mysqli_close($db);
     <div class="container">
         <div class="card mb-4">
             <div class="card-body">
-                <h1 class="card-title text-center"><?php echo round((($positive/$total)*100), 4);?></h1>
-
+                <h1 style="font-size:5em;font-weight:bolder;" class="card-title text-center"><?php echo round((($positive/$total)*100), 2);?> %</h1>
             </div>
         </div>
     </div>
 
     <div class="sm-4">
         <div class="container">
+<hr/>
             <div class="card-deck">
                 <div class="card mb-4">
                     <div class="card-body">
