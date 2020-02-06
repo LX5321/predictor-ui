@@ -51,25 +51,27 @@ if ($result = mysqli_query($db, $sql)) {
     <div class="container sm-4">
         <div class="card-deck">
             <div class="card mb-4">
-                <div class="card-body justify-content-center">
-                    <h4 class="card-title"><?php echo ($patients); ?></h4>
-                    <p class="card-text">Patients registered with @<?php echo($username);?></p>
-                    <button type="button" class="btn btn-blue btn-md">Read more</button>
-                    <button type="button" class="btn btn-blue btn-md">Read more</button>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center font-weight-bold">
+                        <h4 class="card-title"><?php echo ($patients); ?></h4>
+                    </div>
+                    <p class="card-text">Patient/s registered with @<?php echo ($username); ?></p>
+                    <button type="button" class="btn btn-blue btn-md">Add Patient</button>
+                    <button type="button" class="btn btn-blue btn-md">Monitor Patient</button>
                 </div>
             </div>
             <div class="card mb-4">
                 <div class="card-body">
-                    <h4 class="card-title">Insulin</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button type="button" class="btn btn-blue btn-md">Read more</button>
+                    <h4 class="card-title">Observations</h4>
+                    <p class="card-text">Record your patient observations here.</p>
+                    <button type="button" class="btn btn-blue btn-md">Add Observations</button>
                 </div>
             </div>
             <div class="card mb-4">
 
                 <div class="card-body">
-                    <h4 class="card-title">Body Mass Index</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h4 class="card-title">Security</h4>
+                    <p class="card-text">Change Password</p>
                     <button type="button" class="btn btn-blue btn-md">Read more</button>
                 </div>
             </div>
