@@ -1,10 +1,5 @@
 <?php
-session_start();
-include('../php/config.php');
-$username = $_SESSION['login_user'];
-if (!isset($username)) {
-    header("location: ../php/403.html");
-}
+include('../php/header.php');
 
 $sql = "SELECT id FROM doctors where username=\"$username\";";
 if ($result = mysqli_query($db, $sql)) {
@@ -44,9 +39,6 @@ if ($result = mysqli_query($db, $sql)) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-        <a class="navbar-brand" href="index.php">PredictorUI</a>
-    </nav>
     <div class="my-5"></div>
     <div class="container sm-4">
         <div class="card-deck">
@@ -82,5 +74,4 @@ if ($result = mysqli_query($db, $sql)) {
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/mdb.min.js"></script>
 </body>
-
 </html>
