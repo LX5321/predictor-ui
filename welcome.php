@@ -78,7 +78,7 @@ $List3 = implode(', ', $Array3);
                 datasets: [{
                     data: [<?php print_r($List); ?>],
                     backgroundColor: [
-                        'rgba(0, 137, 132, .2)'
+                        'rgba(0, <?php echo '255'; ?>, 132, .2)'
                     ],
                     borderColor: [
                         'rgba(0, 10, 130, .7)',
