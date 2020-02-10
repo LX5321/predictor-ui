@@ -62,23 +62,26 @@ mysqli_close($db);
     </nav>
     <div class="my-5"></div>
     <div class="container">
+        <h1>Prognosis</h1><hr/>
         <div class="card mb-4">
             <div class="card-body text-center">
                 <h1 style="font-size:5em;font-weight:bolder;" class="card-title">
                 <?php 
                 $risk = round((($positive/$total)*100), 2);
-                if($risk>80){echo "<div class='text-danger'> $risk %</div>";}
-                else {echo "<div class='text-success'> $risk %</div>";}
+                if($risk>80){echo "<div class='text-danger'> $risk </div>";}
+                else {echo "<div class='text-success'> $risk</div>";}
                 ?>
                 </h1>
-                <div class="card-text">Predicted risk, compared to previous patients.</div>
+                <div class="card-text">Percent of predicted risk, compared to previous patients.</div>
             </div>
         </div>
     </div>
 
     <div class="sm-4">
         <div class="container">
-<hr/>
+            <hr/>
+            <h1>Statistics</h1>
+            <p>A little information collected over your visits to the doctor.</p>
             <div class="card-deck">
                 <div class="card mb-4">
                     <div class="card-body">
