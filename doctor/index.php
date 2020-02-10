@@ -36,6 +36,8 @@ if ($result = mysqli_query($db, $sql)) {
     <title>PredictorUI</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/mdb.min.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -45,18 +47,17 @@ if ($result = mysqli_query($db, $sql)) {
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-center font-weight-bold">
-                        <h4 class="card-title"><?php echo ($patients); ?></h4>
+                        <h1 style="font-size:5em;font-weight:bolder;" class="card-title"><?php echo ($patients); ?></h1>
                     </div>
-                    <p class="card-text">Patient/s registered with @<?php echo ($username); ?></p>
-                    <button type="button" class="btn btn-blue btn-md">Add Patient</button>
-                    <button type="button" class="btn btn-blue btn-md">Monitor Patient</button>
+                    <p class="card-text">Patients registered with you.</p>
+                    <button type="button" class="btn btn-blue btn-md btn-block">Add Patient</button>
                 </div>
             </div>
             <div class="card mb-4">
                 <div class="card-body">
                     <h4 class="card-title">Observations</h4>
-                    <p class="card-text">Record your patient observations here.</p>
-                    <button type="button" class="btn btn-blue btn-md">Add Observations</button>
+                    <p class="card-text">Add new diagnosis for each patient here.</p>
+                    <button type="button" class="btn btn-blue btn-md btn-block">Add Observations</button>
                 </div>
             </div>
             <div class="card mb-4">
@@ -64,7 +65,7 @@ if ($result = mysqli_query($db, $sql)) {
                 <div class="card-body">
                     <h4 class="card-title">Security</h4>
                     <p class="card-text">Change Password</p>
-                    <button type="button" class="btn btn-blue btn-md">Read more</button>
+                    <button type="button" class="btn btn-danger btn-md btn-block">Read more</button>
                 </div>
             </div>
         </div>
