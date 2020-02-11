@@ -1,12 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-session_start();
-include('../php/config.php');
+include('../php/header.php');
+
+$user_id = $_SESSION['user_id'];
 $username = $_SESSION['login_user'];
-if(!isset($username)){
+
+if (!isset($username)) {
     header("location: ../php/403.html");
 }
+
+$sql = "SELECT * FROM diagnosis WHERE diagnosis.user_id = $user_id  ORDER by diagnosis.id DESC LIMIT 20";
+if ($result = mysqli_query($db, $sql)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+            echo $row['Glucose']."\n";
+        }
+        mysqli_free_result($result);
+    }
+} else {
+    echo "";
+}
+
+
+
+
+
 $sql = "SELECT id FROM users where username=\"$username\";";
 if ($result = mysqli_query($db, $sql)) {
     if (mysqli_num_rows($result) > 0) {
@@ -46,6 +63,8 @@ if ($result = mysqli_query($db, $sql)) {
 // Close connection
 mysqli_close($db);
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -57,20 +76,19 @@ mysqli_close($db);
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-        <a class="navbar-brand" href="index.php">PredictorUI</a>
-    </nav>
     <div class="my-5"></div>
     <div class="container">
-        <h1>Prognosis</h1><hr/>
         <div class="card mb-4">
             <div class="card-body text-center">
                 <h1 style="font-size:5em;font-weight:bolder;" class="card-title">
-                <?php 
-                $risk = round((($positive/$total)*100), 2);
-                if($risk>80){echo "<div class='text-danger'> $risk </div>";}
-                else {echo "<div class='text-success'> $risk</div>";}
-                ?>
+                    <?php
+                    $risk = round((($positive / $total) * 100), 2);
+                    if ($risk > 80) {
+                        echo "<div class='text-danger'> $risk </div>";
+                    } else {
+                        echo "<div class='text-success'> $risk</div>";
+                    }
+                    ?>
                 </h1>
                 <div class="card-text">Percent of predicted risk, compared to previous patients.</div>
             </div>
@@ -79,9 +97,6 @@ mysqli_close($db);
 
     <div class="sm-4">
         <div class="container">
-            <hr/>
-            <h1>Statistics</h1>
-            <p>A little information collected over your visits to the doctor.</p>
             <div class="card-deck">
                 <div class="card mb-4">
                     <div class="card-body">
