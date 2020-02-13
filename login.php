@@ -10,6 +10,7 @@ function check_doctor($db, $username, $password){
     $count = mysqli_num_rows($result);
     if ($count == 1) {
         $_SESSION['login_user'] = $username;
+        $_SESSION['user_id'] = $row['id'];
         header("location: doctor/index.php");
     } else {
         $error = "Your Login Name or Password is invalid";
@@ -26,6 +27,7 @@ function check_patient($db, $username, $password){
     $count = mysqli_num_rows($result);
     if ($count == 1) {
         $_SESSION['login_user'] = $username;
+        $_SESSION['user_id'] = $row['id'];
         header("location: patient/index.php");
     } else {
         check_doctor($db, $username, $password);

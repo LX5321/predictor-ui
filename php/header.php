@@ -11,7 +11,7 @@ if (!isset($username)) {
     <a class="navbar-brand" href="index.php">PredictorUI</a>
     <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item avatar">
-            <a class="nav-link p-0" href="#">
+            <a class="nav-link p-0" href="../logout.php">
                 <img src="avatar-5.jpg" class="rounded-circle z-depth-0" alt="avatar image" height="45">
             </a>
         </li>

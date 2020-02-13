@@ -1,12 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-session_start();
-include('../php/config.php');
+include('../php/header.php');
+
+$user_id = $_SESSION['user_id'];
 $username = $_SESSION['login_user'];
-if(!isset($username)){
+
+if (!isset($username)) {
     header("location: ../php/403.html");
 }
+
+$glucose = [];
+$bloodPressure = [];
+$skinThickness = [];
+$insulin = [];
+$bmi = [];
+$dpf = [];
+
+$sql = "SELECT * FROM diagnosis WHERE diagnosis.user_id = $user_id  ORDER by diagnosis.id DESC LIMIT 7";
+if ($result = mysqli_query($db, $sql)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+            array_push($glucose, $row['Glucose']);
+            array_push($bloodPressure, $row['BloodPressure']);
+            array_push($skinThickness, $row['SkinThickness']);
+            array_push($insulin, $row['Insulin']);
+            array_push($bmi, $row['BMI']);
+            array_push($dpf, $row['DiabetesPedigreeFunction']);
+        }
+        mysqli_free_result($result);
+    }
+} else {
+    echo "";
+}
+
+
+$List1 = implode(', ', $glucose);
+$List2 = implode(', ', $bloodPressure);
+$List3 = implode(', ', $skinThickness);
+$List4 = implode(', ', $insulin);
+$List5 = implode(', ', $bmi);
+$List6 = implode(', ', $dpf);
+
 $sql = "SELECT id FROM users where username=\"$username\";";
 if ($result = mysqli_query($db, $sql)) {
     if (mysqli_num_rows($result) > 0) {
@@ -46,6 +79,8 @@ if ($result = mysqli_query($db, $sql)) {
 // Close connection
 mysqli_close($db);
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -57,60 +92,398 @@ mysqli_close($db);
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-        <a class="navbar-brand" href="index.php">PredictorUI</a>
-    </nav>
     <div class="my-5"></div>
     <div class="container">
-        <h1>Prognosis</h1><hr/>
         <div class="card mb-4">
             <div class="card-body text-center">
                 <h1 style="font-size:5em;font-weight:bolder;" class="card-title">
-                <?php 
-                $risk = round((($positive/$total)*100), 2);
-                if($risk>80){echo "<div class='text-danger'> $risk </div>";}
-                else {echo "<div class='text-success'> $risk</div>";}
-                ?>
+                    <?php
+                    $risk = round((($positive / $total) * 100), 2);
+                    if ($risk > 80) {
+                        echo "<div class='text-danger'> $risk </div>";
+                    } else {
+                        echo "<div class='text-success'> $risk</div>";
+                    }
+                    ?>
                 </h1>
                 <div class="card-text">Percent of predicted risk, compared to previous patients.</div>
             </div>
         </div>
     </div>
 
-    <div class="sm-4">
-        <div class="container">
-            <hr/>
-            <h1>Statistics</h1>
-            <p>A little information collected over your visits to the doctor.</p>
-            <div class="card-deck">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h4 class="card-title">Glucose</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
+    <div class="container sm-4">
+        <div class="card-deck">
+            <div class="card mb-4">
+                <div class="view overlay">
+                    <div>
+                        <canvas id="lineChart"></canvas>
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h4 class="card-title">Insulin</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+                <div class="card-body">
+                    <h4 class="card-title">Glucose</h4>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="view overlay">
+                    <div>
+                        <canvas id="lineChart2"></canvas>
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h4 class="card-title">Body Mass Index</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+                <div class="card-body">
+                    <h4 class="card-title">Insulin</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="view overlay">
+                    <div>
+                        <canvas id="lineChart3"></canvas>
                     </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Body Mass Index</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container sm-4">
+        <div class="card-deck">
+            <div class="card mb-4">
+                <div class="view overlay">
+                    <div>
+                        <canvas id="lineChart4"></canvas>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Glucose</h4>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="view overlay">
+                    <div>
+                        <canvas id="lineChart5"></canvas>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Insulin</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="view overlay">
+                    <div>
+                        <canvas id="lineChart6"></canvas>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Body Mass Index</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../js/popper.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/mdb.min.js"></script>
+
+    <script>
+        setTimeout(() => {
+
+            var ctxL = document.getElementById("lineChart").getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: [<?php print_r($List1); ?>],
+                    datasets: [{
+                        data: [<?php print_r($List1); ?>],
+                        backgroundColor: [
+                            'rgba(76, 175, 80, .2)'
+                        ],
+                        borderColor: [
+                            'rgba(76, 175, 80, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                }
+            });
+            var ctxL = document.getElementById("lineChart").getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: [<?php print_r($List1); ?>],
+                    datasets: [{
+                        data: [<?php print_r($List1); ?>],
+                        backgroundColor: [
+                            'rgba(0, 250, 132, .2)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 10, 130, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                }
+            });
+            var ctxL = document.getElementById("lineChart2").getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: [<?php print_r($List2); ?>],
+                    datasets: [{
+                        data: [<?php print_r($List2); ?>],
+                        backgroundColor: [
+                            'rgba(63, 81, 181, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(63, 81, 181, 0.7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                }
+            });
+            var ctxL = document.getElementById("lineChart3").getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: [<?php print_r($List3); ?>],
+                    datasets: [{
+                        data: [<?php print_r($List3); ?>],
+                        backgroundColor: [
+                            'rgba(156, 39, 176, .2)'
+                        ],
+                        borderColor: [
+                            'rgba(156, 39, 176, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                }
+            });
+            var ctxL = document.getElementById("lineChart4").getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: [<?php print_r($List4); ?>],
+                    datasets: [{
+                        data: [<?php print_r($List4); ?>],
+                        backgroundColor: [
+                            'rgba(0, 188, 212, .2)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 188, 212, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                }
+            });
+            var ctxL = document.getElementById("lineChart5").getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: [<?php print_r($List5); ?>],
+                    datasets: [{
+                        data: [<?php print_r($List5); ?>],
+                        backgroundColor: [
+                            'rgba(255, 152, 0, .2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 152, 0, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                }
+            });
+            var ctxL = document.getElementById("lineChart6").getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: [<?php print_r($List6); ?>],
+                    datasets: [{
+                        data: [<?php print_r($List6); ?>],
+                        backgroundColor: [
+                            'rgba(233, 30, 99, .2)'
+                        ],
+                        borderColor: [
+                            'rgba(233, 30, 99, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                }
+            });
+
+        }, 2500);
+    </script>
 </body>
 
 </html>
