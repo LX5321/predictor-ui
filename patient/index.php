@@ -202,10 +202,10 @@ mysqli_close($db);
                     datasets: [{
                         data: [<?php print_r($List1); ?>],
                         backgroundColor: [
-                            'rgba(0, 250, 132, .2)'
+                            'rgba(76, 175, 80, .2)'
                         ],
                         borderColor: [
-                            'rgba(0, 10, 130, .7)',
+                            'rgba(76, 175, 80, .7)',
                         ],
                         borderWidth: 2
                     }]
@@ -284,10 +284,10 @@ mysqli_close($db);
                     datasets: [{
                         data: [<?php print_r($List2); ?>],
                         backgroundColor: [
-                            'rgba(0, 250, 132, .2)'
+                            'rgba(63, 81, 181, 0.2)'
                         ],
                         borderColor: [
-                            'rgba(0, 10, 130, .7)',
+                            'rgba(63, 81, 181, 0.7)',
                         ],
                         borderWidth: 2
                     }]
@@ -325,10 +325,10 @@ mysqli_close($db);
                     datasets: [{
                         data: [<?php print_r($List3); ?>],
                         backgroundColor: [
-                            'rgba(0, 250, 132, .2)'
+                            'rgba(156, 39, 176, .2)'
                         ],
                         borderColor: [
-                            'rgba(0, 10, 130, .7)',
+                            'rgba(156, 39, 176, .7)',
                         ],
                         borderWidth: 2
                     }]
@@ -362,14 +362,14 @@ mysqli_close($db);
             var myLineChart = new Chart(ctxL, {
                 type: 'line',
                 data: {
-                    labels: [<?php print_r($List1); ?>],
+                    labels: [<?php print_r($List4); ?>],
                     datasets: [{
-                        data: [<?php print_r($List1); ?>],
+                        data: [<?php print_r($List4); ?>],
                         backgroundColor: [
-                            'rgba(0, 250, 132, .2)'
+                            'rgba(0, 188, 212, .2)'
                         ],
                         borderColor: [
-                            'rgba(0, 10, 130, .7)',
+                            'rgba(0, 188, 212, .7)',
                         ],
                         borderWidth: 2
                     }]
@@ -403,14 +403,14 @@ mysqli_close($db);
             var myLineChart = new Chart(ctxL, {
                 type: 'line',
                 data: {
-                    labels: [<?php print_r($List1); ?>],
+                    labels: [<?php print_r($List5); ?>],
                     datasets: [{
-                        data: [<?php print_r($List1); ?>],
+                        data: [<?php print_r($List5); ?>],
                         backgroundColor: [
-                            'rgba(0, 250, 132, .2)'
+                            'rgba(255, 152, 0, .2)'
                         ],
                         borderColor: [
-                            'rgba(0, 10, 130, .7)',
+                            'rgba(255, 152, 0, .7)',
                         ],
                         borderWidth: 2
                     }]
@@ -444,14 +444,14 @@ mysqli_close($db);
             var myLineChart = new Chart(ctxL, {
                 type: 'line',
                 data: {
-                    labels: [<?php print_r($List1); ?>],
+                    labels: [<?php print_r($List6); ?>],
                     datasets: [{
-                        data: [<?php print_r($List1); ?>],
+                        data: [<?php print_r($List6); ?>],
                         backgroundColor: [
-                            'rgba(0, 250, 132, .2)'
+                            'rgba(233, 30, 99, .2)'
                         ],
                         borderColor: [
-                            'rgba(0, 10, 130, .7)',
+                            'rgba(233, 30, 99, .7)',
                         ],
                         borderWidth: 2
                     }]
