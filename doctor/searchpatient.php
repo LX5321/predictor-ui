@@ -1,14 +1,11 @@
 <?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-include('../php/header.php');
+include('../php/config.php');
 $link = $db;
-
+echo "<div class='card-deck'>";
 // Check connection
 if ($link === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
-
 if (isset($_REQUEST["term"])) {
     // Prepare a select statement
     $sql = "SELECT * FROM users WHERE full_name LIKE ?";
@@ -28,7 +25,7 @@ if (isset($_REQUEST["term"])) {
             if (mysqli_num_rows($result) > 0) {
                 // Fetch result rows as an associative array
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                    echo "<p>" . $row["full_name"] . $row["id"]. "</p>";
+                    echo "<div class='card mb-3'><div class='card-body'><div class='d-flex justify-content-center'><h1>" . $row["full_name"] . "</h1></div><a href='patientinfo.php?id=".$row["id"]."'><button class='btn btn-secondary'>Information</button></a></div></div></p>";
                 }
             } else {
                 echo "<p>No matches found</p>";
@@ -41,6 +38,8 @@ if (isset($_REQUEST["term"])) {
         mysqli_stmt_close($stmt);
     }
 }
+
+echo "</div>";
 
 // close connection
 mysqli_close($link);
