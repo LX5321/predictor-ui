@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Home | Predictor</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/mdb.min.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+
+</head>
+
 <?php
 include('../php/header.php');
 
@@ -29,7 +43,7 @@ $sql = "SELECT count(*) as pending FROM relation where doctor_id=$user_id";
 if ($result = mysqli_query($db, $sql)) {
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
-            $patients = $row['number_patients'];
+            $patients = $row['pending'];
         }
         mysqli_free_result($result);
     }
@@ -38,19 +52,6 @@ if ($result = mysqli_query($db, $sql)) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>PredictorUI</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/mdb.min.css" rel="stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
-
-</head>
 
 <body>
     <div class="my-5"></div>
@@ -62,18 +63,21 @@ if ($result = mysqli_query($db, $sql)) {
                         <h1 style="font-size:5em;font-weight:bolder;" class="card-title"><?php echo ($patients); ?></h1>
                     </div>
                     <p class="card-text">Patients registered with you.</p>
-                    <!-- <button type="button" class="btn btn-blue btn-md btn-block">Add Patient</button> -->
                 </div>
             </div>
+
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-center font-weight-bold">
                         <h1 style="font-size:5em;font-weight:bolder;" class="card-title"><?php echo ($patients); ?></h1>
                     </div>
                     <p class="card-text">Patients registered with you.</p>
-                    <!-- <button type="button" class="btn btn-blue btn-md btn-block">Add Patient</button> -->
+                    <a href="searchform.php">
+                        <button type="button" class="btn btn-blue btn-md btn-block">Add Patient</button>
+                    </a>
                 </div>
             </div>
+
         </div>
     </div>
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
