@@ -49,7 +49,9 @@
     </nav>
     <div class="my-5"></div>
     <div class="container sm-4">
-        
+        <div class="h1">
+            Search Patient
+        </div>
             <div class="search-box">
                 <input class="form-control mb-4" type="text" autocomplete="off" placeholder="Search Patient.." />
                 <div class="mb-4"></div>

@@ -13,6 +13,7 @@
 </head>
 <?php
 include('../php/header.php');
+$user_id = $_GET['id'];
 ?>
 <div class="mb-2"></div>
 <div class="container">
@@ -20,25 +21,36 @@ include('../php/header.php');
 
         <p class="h4 mb-4 text-center">Sign in</p>
         <div class="row">
-            <div class="col-sm">
-                <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+            <div class="col-sm text-center">
+                <input type="number" id="user_id" class="form-control mb-4" readonly value="<?php echo $user_id;?>">
             </div>
             <div class="col-sm">
-                <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                <input type="text" id="pregnancies" class="form-control mb-4" placeholder="Pregnancies">
             </div>
             <div class="col-sm">
-                <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                <input type="text" id="glucose" class="form-control mb-4" placeholder="Glucose">
             </div>
         </div>
         <div class="row">
             <div class="col-sm">
-                <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                <input type="text" id="bloodpressure" class="form-control mb-4" placeholder="Blood Pressure">
             </div>
             <div class="col-sm">
-                <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                <input type="text" id="skinthickness" class="form-control mb-4" placeholder="Skin Thickness">
             </div>
             <div class="col-sm">
-                <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                <input type="text" id="insulin" class="form-control mb-4" placeholder="Insulin">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <input type="text" id="bmi" class="form-control mb-4" placeholder="Body Mass Index">
+            </div>
+            <div class="col-sm">
+                <input type="text" id="dpf" class="form-control mb-4" placeholder="Diabetes Pedigree Function">
+            </div>
+            <div class="col-sm">
+                <input type="text" id="age" class="form-control mb-4" placeholder="Age">
             </div>
         </div>
 
