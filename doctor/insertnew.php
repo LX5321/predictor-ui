@@ -18,39 +18,38 @@ $user_id = $_GET['id'];
 <div class="mb-2"></div>
 <div class="container">
     <form class="p-5" method="POST" action="insertintodb.php">
-
         <p class="h4 mb-4 text-center">Sign in</p>
         <div class="row">
             <div class="col-sm text-center">
-                <input type="number" id="user_id" class="form-control mb-4" readonly value="<?php echo $user_id;?>">
+                <input type="number" name="user_id" class="form-control mb-4" readonly value="<?php echo $user_id;?>">
             </div>
             <div class="col-sm">
-                <input type="text" id="pregnancies" class="form-control mb-4" placeholder="Pregnancies">
+                <input type="number" name="pregnancies" class="form-control mb-4" placeholder="Pregnancies">
             </div>
             <div class="col-sm">
-                <input type="text" id="glucose" class="form-control mb-4" placeholder="Glucose">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <input type="text" id="bloodpressure" class="form-control mb-4" placeholder="Blood Pressure">
-            </div>
-            <div class="col-sm">
-                <input type="text" id="skinthickness" class="form-control mb-4" placeholder="Skin Thickness">
-            </div>
-            <div class="col-sm">
-                <input type="text" id="insulin" class="form-control mb-4" placeholder="Insulin">
+                <input type="number" name="glucose" class="form-control mb-4" placeholder="Glucose">
             </div>
         </div>
         <div class="row">
             <div class="col-sm">
-                <input type="text" id="bmi" class="form-control mb-4" placeholder="Body Mass Index">
+                <input type="number" name="bloodpressure" class="form-control mb-4" placeholder="Blood Pressure">
             </div>
             <div class="col-sm">
-                <input type="text" id="dpf" class="form-control mb-4" placeholder="Diabetes Pedigree Function">
+                <input type="number" name="skinthickness" class="form-control mb-4" placeholder="Skin Thickness">
             </div>
             <div class="col-sm">
-                <input type="text" id="age" class="form-control mb-4" placeholder="Age">
+                <input type="number" name="insulin" class="form-control mb-4" placeholder="Insulin">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <input type="number" name="bmi" class="form-control mb-4" placeholder="Body Mass Index">
+            </div>
+            <div class="col-sm">
+                <input type="number" name="dpf" class="form-control mb-4" placeholder="Diabetes Pedigree Function">
+            </div>
+            <div class="col-sm">
+                <input type="number" name="age" class="form-control mb-4" placeholder="Age">
             </div>
         </div>
 
