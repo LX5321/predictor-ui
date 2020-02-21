@@ -17,7 +17,7 @@ $user_id = $_GET['id'];
 ?>
 <div class="mb-2"></div>
 <div class="container">
-    <form class="p-5">
+    <form class="p-5" method="POST" action="insertintodb.php">
 
         <p class="h4 mb-4 text-center">Sign in</p>
         <div class="row">
