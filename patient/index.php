@@ -131,8 +131,8 @@ mysqli_close($db);
                     </div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Insulin</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h4 class="card-title">Blood Pressure</h4>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                 </div>
             </div>
             <div class="card mb-4">
@@ -142,8 +142,8 @@ mysqli_close($db);
                     </div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Body Mass Index</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h4 class="card-title">Skin Thickness</h4>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@ mysqli_close($db);
                     </div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Glucose</h4>
+                    <h4 class="card-title">Insulin</h4>
                 </div>
             </div>
             <div class="card mb-4">
@@ -167,8 +167,8 @@ mysqli_close($db);
                     </div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Insulin</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h4 class="card-title">Body Mass Index</h4>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                 </div>
             </div>
             <div class="card mb-4">
@@ -178,13 +178,13 @@ mysqli_close($db);
                     </div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Body Mass Index</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h4 class="card-title">DPF</h4>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                 </div>
             </div>
         </div>
     </div>
-
+    <?php include('../php/footer.php'); ?>
 
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../js/popper.min.js"></script>
@@ -235,47 +235,6 @@ mysqli_close($db);
 
                 }
             });
-            var ctxL = document.getElementById("lineChart").getContext('2d');
-            var myLineChart = new Chart(ctxL, {
-                type: 'line',
-                data: {
-                    labels: [<?php print_r($List1); ?>],
-                    datasets: [{
-                        data: [<?php print_r($List1); ?>],
-                        backgroundColor: [
-                            'rgba(0, 250, 132, .2)'
-                        ],
-                        borderColor: [
-                            'rgba(0, 10, 130, .7)',
-                        ],
-                        borderWidth: 2
-                    }]
-                },
-
-                options: {
-                    responsive: true,
-                    scales: {
-                        xAxes: [{
-                            display: false
-                        }],
-                        yAxes: [{
-                            display: false
-                        }]
-                    },
-                    legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        enabled: false
-                    },
-                    elements: {
-                        point: {
-                            radius: 0
-                        }
-                    }
-
-                }
-            });
             var ctxL = document.getElementById("lineChart2").getContext('2d');
             var myLineChart = new Chart(ctxL, {
                 type: 'line',
@@ -284,10 +243,10 @@ mysqli_close($db);
                     datasets: [{
                         data: [<?php print_r($List2); ?>],
                         backgroundColor: [
-                            'rgba(63, 81, 181, 0.2)'
+                            'rgba(0, 250, 132, .2)'
                         ],
                         borderColor: [
-                            'rgba(63, 81, 181, 0.7)',
+                            'rgba(0, 10, 130, .7)',
                         ],
                         borderWidth: 2
                     }]
@@ -325,10 +284,10 @@ mysqli_close($db);
                     datasets: [{
                         data: [<?php print_r($List3); ?>],
                         backgroundColor: [
-                            'rgba(156, 39, 176, .2)'
+                            'rgba(63, 81, 181, 0.2)'
                         ],
                         borderColor: [
-                            'rgba(156, 39, 176, .7)',
+                            'rgba(63, 81, 181, 0.7)',
                         ],
                         borderWidth: 2
                     }]
@@ -366,10 +325,10 @@ mysqli_close($db);
                     datasets: [{
                         data: [<?php print_r($List4); ?>],
                         backgroundColor: [
-                            'rgba(0, 188, 212, .2)'
+                            'rgba(156, 39, 176, .2)'
                         ],
                         borderColor: [
-                            'rgba(0, 188, 212, .7)',
+                            'rgba(156, 39, 176, .7)',
                         ],
                         borderWidth: 2
                     }]
@@ -406,6 +365,47 @@ mysqli_close($db);
                     labels: [<?php print_r($List5); ?>],
                     datasets: [{
                         data: [<?php print_r($List5); ?>],
+                        backgroundColor: [
+                            'rgba(0, 188, 212, .2)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 188, 212, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                }
+            });
+            var ctxL = document.getElementById("lineChart6").getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: [<?php print_r($List6); ?>],
+                    datasets: [{
+                        data: [<?php print_r($List6); ?>],
                         backgroundColor: [
                             'rgba(255, 152, 0, .2)'
                         ],
