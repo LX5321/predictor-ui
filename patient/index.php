@@ -14,8 +14,9 @@ $skinThickness = [];
 $insulin = [];
 $bmi = [];
 $dpf = [];
+$timeDiagnosed = [];
 
-$sql = "SELECT * FROM diagnosis WHERE diagnosis.user_id = $user_id  ORDER by diagnosis.id DESC LIMIT 7";
+$sql = "SELECT * FROM diagnosis WHERE diagnosis.user_id = $user_id  ORDER by diagnosis.id DESC LIMIT 10";
 if ($result = mysqli_query($db, $sql)) {
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
@@ -25,6 +26,7 @@ if ($result = mysqli_query($db, $sql)) {
             array_push($insulin, $row['Insulin']);
             array_push($bmi, $row['BMI']);
             array_push($dpf, $row['DiabetesPedigreeFunction']);
+            array_push($timeDiagnosed, $row['TimeDiagnosed']);
         }
         mysqli_free_result($result);
     }
@@ -39,6 +41,7 @@ $List3 = implode(', ', $skinThickness);
 $List4 = implode(', ', $insulin);
 $List5 = implode(', ', $bmi);
 $List6 = implode(', ', $dpf);
+$td = implode(', ', $timeDiagnosed);
 
 $sql = "SELECT id FROM users where username=\"$username\";";
 if ($result = mysqli_query($db, $sql)) {
@@ -122,6 +125,7 @@ mysqli_close($db);
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">Glucose</h4>
+                    <p class="card-text">Plasma glucose concentration a 2 hours in an oral glucose tolerance test.</p>
                 </div>
             </div>
             <div class="card mb-4">
@@ -132,7 +136,7 @@ mysqli_close($db);
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">Blood Pressure</h4>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    <p class="card-text">Diastolic blood pressure (mm Hg).</p>
                 </div>
             </div>
             <div class="card mb-4">
@@ -143,7 +147,7 @@ mysqli_close($db);
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">Skin Thickness</h4>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    <p class="card-text">Triceps skin fold thickness (mm).</p>
                 </div>
             </div>
         </div>
@@ -158,6 +162,7 @@ mysqli_close($db);
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">Insulin</h4>
+                    <p class="card-text">2-Hour serum insulin (mu U/ml).</p>
                 </div>
             </div>
             <div class="card mb-4">
@@ -168,7 +173,7 @@ mysqli_close($db);
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">Body Mass Index</h4>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    <p class="card-text">Body mass index (weight in kg/(height in m)^2).</p>
                 </div>
             </div>
             <div class="card mb-4">
@@ -179,7 +184,7 @@ mysqli_close($db);
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">DPF</h4>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    <p class="card-text">Diabetes Pedigree Function.</p>
                 </div>
             </div>
         </div>
@@ -225,11 +230,11 @@ mysqli_close($db);
                         display: false
                     },
                     tooltips: {
-                        enabled: false
+                        enabled: true
                     },
                     elements: {
                         point: {
-                            radius: 0
+                            radius: 5
                         }
                     }
 
@@ -266,16 +271,17 @@ mysqli_close($db);
                         display: false
                     },
                     tooltips: {
-                        enabled: false
+                        enabled: true
                     },
                     elements: {
                         point: {
-                            radius: 0
+                            radius: 5
                         }
                     }
 
                 }
             });
+            
             var ctxL = document.getElementById("lineChart3").getContext('2d');
             var myLineChart = new Chart(ctxL, {
                 type: 'line',
@@ -307,11 +313,11 @@ mysqli_close($db);
                         display: false
                     },
                     tooltips: {
-                        enabled: false
+                        enabled: true
                     },
                     elements: {
                         point: {
-                            radius: 0
+                            radius: 5
                         }
                     }
 
@@ -348,11 +354,11 @@ mysqli_close($db);
                         display: false
                     },
                     tooltips: {
-                        enabled: false
+                        enabled: true
                     },
                     elements: {
                         point: {
-                            radius: 0
+                            radius: 5
                         }
                     }
 
@@ -389,11 +395,11 @@ mysqli_close($db);
                         display: false
                     },
                     tooltips: {
-                        enabled: false
+                        enabled: true
                     },
                     elements: {
                         point: {
-                            radius: 0
+                            radius: 5
                         }
                     }
 
@@ -430,52 +436,11 @@ mysqli_close($db);
                         display: false
                     },
                     tooltips: {
-                        enabled: false
+                        enabled: true
                     },
                     elements: {
                         point: {
-                            radius: 0
-                        }
-                    }
-
-                }
-            });
-            var ctxL = document.getElementById("lineChart6").getContext('2d');
-            var myLineChart = new Chart(ctxL, {
-                type: 'line',
-                data: {
-                    labels: [<?php print_r($List6); ?>],
-                    datasets: [{
-                        data: [<?php print_r($List6); ?>],
-                        backgroundColor: [
-                            'rgba(233, 30, 99, .2)'
-                        ],
-                        borderColor: [
-                            'rgba(233, 30, 99, .7)',
-                        ],
-                        borderWidth: 2
-                    }]
-                },
-
-                options: {
-                    responsive: true,
-                    scales: {
-                        xAxes: [{
-                            display: false
-                        }],
-                        yAxes: [{
-                            display: false
-                        }]
-                    },
-                    legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        enabled: false
-                    },
-                    elements: {
-                        point: {
-                            radius: 0
+                            radius: 5
                         }
                     }
 

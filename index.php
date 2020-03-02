@@ -58,17 +58,17 @@
       </div>
     </div>
   </nav>
-  <div class="view full-page-intro" style="background-image: url('img/sample.jpg'); background-repeat: no-repeat; background-size: cover;">
+  <div class="view full-page-intro" style="background-image: url('img/bill_edit.jpg'); background-repeat: no-repeat; background-size: cover;">
     <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
       <div class="container">
         <div class="row wow fadeIn">
           <div class="col-md-6 mb-4 white-text text-center text-md-left">
             <h1 class="display-4 font-weight-bold">
-              Lightweight User Interface for the backend.
+            Neural Networks. Now Predicting Diabetes.
             </h1>
             <hr class="hr-light" />
             <p>
-              <strong>Now for the web.</strong>
+              <strong>Now accessible from anywhere.</strong>
             </p>
             <!-- 
               <p class="mb-4 d-none d-md-block">

@@ -25,7 +25,7 @@ if (isset($_REQUEST["term"])) {
             if (mysqli_num_rows($result) > 0) {
                 // Fetch result rows as an associative array
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                    echo "<div class='card mb-3'><div class='card-body'><div class='d-flex justify-content-center'><h1>" . $row["full_name"] . "</h1></div><a href='patientinfo.php?id=".$row["id"]."'><button class='btn btn-secondary'>Information</button></a><a href='insertnew.php?id=".$row["id"]."'><button class='btn btn-secondary'>Add New</button></a></div></div></p>";
+                    echo "<div class='card mb-3'><div class='card-body'><div class='d-flex justify-content-center'><h3>" . $row["full_name"] . "</h3></div><a href='patientinfo.php?id=".$row["id"]."'><div class='d-flex justify-content-center'><button class='btn btn-secondary btn-sm'>Information</button></a><a href='insertnew.php?id=".$row["id"]."'><button class='btn btn-success btn-sm'>Add New</button></a></div></div></div></p>";
                 }
             } else {
                 echo "<p>No matches found</p>";

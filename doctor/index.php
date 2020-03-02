@@ -14,7 +14,6 @@
 
 <?php
 include('../php/header.php');
-
 $sql = "SELECT id FROM doctors where username=\"$username\";";
 if ($result = mysqli_query($db, $sql)) {
     if (mysqli_num_rows($result) > 0) {
@@ -57,29 +56,28 @@ if ($result = mysqli_query($db, $sql)) {
     <div class="my-5"></div>
     <div class="container sm-4">
         <div class="card-deck">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-center font-weight-bold">
-                        <h1 style="font-size:5em;font-weight:bolder;" class="card-title"><?php echo ($patients); ?></h1>
-                    </div>
-                    <p class="card-text">Patients registered with you.</p>
-                </div>
-            </div>
 
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-center font-weight-bold">
                         <h1 style="font-size:5em;font-weight:bolder;" class="card-title"><?php echo ($patients); ?></h1>
                     </div>
-                    <p class="card-text">Patients registered with you.</p>
+                    <p class="card-text">Patients registered with you. Search for patients and upload observations for the neural network to generate predictions on!</p>
                     <a href="searchform.php">
-                        <button type="button" class="btn btn-blue btn-md btn-block">Add Patient</button>
+                        <button type="button" class="btn btn-blue btn-md btn-block">Find Patient</button>
                     </a>
                 </div>
             </div>
 
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <?php include('../php/footer.php')?>
+
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../js/popper.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
